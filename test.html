@@ -1,0 +1,14 @@
+<script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+<script>
+  const socket = io("http://localhost:3000");
+
+  socket.on("connect", () => {
+    console.log("Connected to Server!");
+    socket.emit("chat message", "Hello from the browser!");
+  });
+
+  socket.on("chat message", (data) => {
+    alert("Real-time alert: " + data);
+  });
+</script>
+<h1>Check your Console and wait for the Alert!</h1>

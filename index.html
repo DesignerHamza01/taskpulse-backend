@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Live Admin Dashboard</title>
+</head>
+<body>
+    <h1>Waiting for new users...</h1>
+    <ul id="notifications"></ul>
+
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script>
+        // Connect to your local server
+        const socket = io("http://localhost:3000");
+
+        // Listen for the specific 'new_user_joined' event
+        socket.on('new_user_joined', (data) => {
+            const list = document.getElementById('notifications');
+            const item = document.createElement('li');
+            item.innerText = data.message;
+            item.style.color = "green";
+            item.style.fontWeight = "bold";
+            list.appendChild(item);
+            
+            console.log("Real-time data received:", data);
+        });
+    </script>
+</body>
+</html>
